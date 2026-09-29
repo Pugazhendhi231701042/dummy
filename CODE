@@ -1,1 +1,24 @@
-HELLO WORLD 
+Caesar Cipher
+s=input("Text: ").upper()
+k=int(input("Key: "))
+print("Cipher:",''.join(chr((ord(c)-65+k)%26+65) for c in s))
+
+Vigenère Cipher
+s=input("Text: ").upper()
+k=input("Key: ").upper()
+print("Cipher:",''.join(chr((ord(c)-65+ord(k[i%len(k)])-65)%26+65) for i,c in enumerate(s)))
+
+Hill Cipher
+import numpy as np
+
+k=np.array([[3,3],[2,5]])
+s=input("Text: ").upper()
+
+if len(s)%2:s+="X"
+
+print("Cipher:",end=" ")
+for i in range(0,len(s),2):
+    p=np.array([[ord(s[i])-65],[ord(s[i+1])-65]])
+    c=k@p%26
+    print(chr(c[0,0]+65)+chr(c[1,0]+65),end="")
+print()
